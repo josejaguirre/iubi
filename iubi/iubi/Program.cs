@@ -31,7 +31,6 @@ namespace iubi
                 ShowWindow(hWind, 0);
             }
             Console.ReadKey();
-
         }
     }
 }

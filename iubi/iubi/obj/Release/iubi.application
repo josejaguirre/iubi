@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="iubi.exe.manifest" size="10200">
+    <dependentAssembly dependencyType="install" codebase="iubi.exe.manifest" size="8397">
       <assemblyIdentity name="iubi.exe" version="1.0.0.9" publicKeyToken="0000000000000000" language="es-CO" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4Ga7DFD9AW5oW1r91/AHrIGs0TaNEHVnWAmdsEIGEfk=</dsig:DigestValue>
+        <dsig:DigestValue>hlCCJwuHuEDRif6ifgbinTccdvhTqTuTTfmeUp0jvuc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

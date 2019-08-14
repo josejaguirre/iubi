@@ -22,10 +22,14 @@ namespace iubi
         public WebSocketServer appServer;
         private const string _PORT_SOCKET = "2015";
 
-        public int stateEnrroller = 0;     // controla el estado del proceso de incripción.
-        public DPFP.Processing.Enrollment Enroller;  // incripcion de huella.
-        public DPFP.Capture.Capture Capturer;    // controla la captura de la huella.
-        public string typeProcces = "checkin"; // tipo de proceso que ejecutara el lector (register/validation/checkin) 
+        // Controlling the state process for subcribe
+        public int stateEnrroller = 0;
+        // Register finger
+        public DPFP.Processing.Enrollment Enroller;
+        // Controller of register finger
+        public DPFP.Capture.Capture Capturer;
+        // Type process for execute the reader (register/validation/checkin)
+        public string typeProcces = "checkin"; 
         public string bitmapDactilar = null;
         public string dedo = "";
         public bool resultRegister;
@@ -78,12 +82,15 @@ namespace iubi
         {
             try
             {
-                Enroller = new DPFP.Processing.Enrollment();            // Create an enrollment.
-                Capturer = new DPFP.Capture.Capture(Priority.Low);              // Create a capture operation.
+                // Create an enrollment.
+                Enroller = new DPFP.Processing.Enrollment();
+                // Create a capture operation.
+                Capturer = new DPFP.Capture.Capture(Priority.Low); 
 
                 UpdateStatus();
-                if (null != Capturer)
-                    Capturer.EventHandler = this;                   // Subscribe for capturing events.
+
+                // Subscribe for capturing events.
+                if (null != Capturer) Capturer.EventHandler = this;
             }
             catch
             {
@@ -179,8 +186,7 @@ namespace iubi
                             _huella._identificacion = identificacion;
                             _huella._huella1 = footprintByte;
                             _huella._dedo = dedo;
-                            resultRegister = HuellaOAD.Registrarhuella(_huella, ServerType) > 0 ? true : false;
-                            state = resultRegister == true ? "complete" : "failed";
+                            state = resultRegister ? "complete" : "failed";
                             this.Pause();
 
                             break;
@@ -211,22 +217,7 @@ namespace iubi
         private bool ValidateOneFingerPrint(FeatureSet features)
         {
 
-            List<Huella> _dataHuella = HuellaOAD.consultarHuella(identificacion,ServerType);
-            if (_dataHuella!=null)
-            {
-                foreach (Huella item in _dataHuella)
-                {
-
-                    if (VerifyFinger(item._huella1, features) == true)
-                    {
-                        return true;
-
-                    }
-                }
-            }
-            else
-            {
-                string json = @"data =
+            string json = @"data =
                     {
                         'type': '" + "failed" + @"',
                         'payload': [
@@ -237,11 +228,9 @@ namespace iubi
                     }
                 ";
 
-                foreach (WebSocketSession session in appServer.GetAllSessions())
-                {
-                    session.Send(json);
-                }
-              
+            foreach (WebSocketSession session in appServer.GetAllSessions())
+            {
+                session.Send(json);
             }
             return false;
 
@@ -509,106 +498,6 @@ namespace iubi
         }
         #endregion
 
-        #region PERSISTENCIA OAD
-        public class HuellaOAD
-        {
-            public static string ServerType;
-            public static int Registrarhuella(Huella phuella, string ServerType)
-            {
-                
-                int retorno = 0;
-                using (MySqlConnection conn = InternConexionBD.ObtenerConexion(typeConnect(ServerType)))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand())
-                    {
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO huella(huell_identificacion,huell_huella,huell_dedo) VALUES (@huell_identificacion,@huell_huella,@huell_dedo)";
-                        cmd.Parameters.AddWithValue("@huell_identificacion", phuella._identificacion);
-                        cmd.Parameters.AddWithValue("@huell_huella", phuella._huella1);
-                        cmd.Parameters.AddWithValue("@huell_dedo", phuella._dedo);
-                        retorno = cmd.ExecuteNonQuery();
-                        conn.Close();
-                    }
-
-                }
-                return retorno;
-            }
-            public static List<Huella> consultarHuella(string identificacion,string ServerType)
-            {
-                MySqlConnection connect = InternConexionBD.ObtenerConexion(typeConnect(ServerType));
-                if (connect!=null)
-                {
-                    using (MySqlConnection conn = connect)
-                    {
-                        List<Huella> _lista = new List<Huella>();
-                        string sql = "SELECT  huell_identificacion,huell_huella FROM huella WHERE huell_identificacion= '" + identificacion + "'";
-                        MySqlCommand _comando = new MySqlCommand(sql, conn);
-                        MySqlDataReader _reader = _comando.ExecuteReader();
-
-                        while (_reader.Read())
-                        {
-
-                            Huella pHuella = new Huella();
-                            pHuella._identificacion = _reader.GetString(0);
-                            pHuella._huella1 = (byte[])_reader.GetValue(1);
-                            _lista.Add(pHuella);
-
-                        }
-
-
-                        return _lista;
-                    }
-                }
-                return null;
-               
-            }
-            public static string typeConnect(string ServerType) {
-                string connectServer = "";
-                switch (ServerType)
-                {
-                    case "products":
-                        connectServer = "server=192.168.0.100; database=control_acceso; Uid=planta; pwd=planta123;";
-                        break;
-                    case "test":
-                        connectServer = "server=192.168.0.91; database=control_acceso; Uid=planta; pwd=planta123;";
-                        break;
-                    default:
-                        connectServer = "server=127.0.0.1; database=control_acceso; Uid=root; pwd=root;";
-                        break;
-                }
-                return connectServer;
-            }
-        }
-        public class General
-        {
-            private InternConexionBD connection = new InternConexionBD();
-        }
-        #endregion
-
-        #region CONEXION A LA BASE DE DATOS
-        /// <summary>
-        /// Conexion a la base de datos para consultar o registrar huellas.
-        /// </summary>
-        public class InternConexionBD
-        {
-            public static MySqlConnection ObtenerConexion(string connectServer)
-            {
-                try
-                {
-                    MySqlConnection conectar = new MySqlConnection(connectServer);
-                    conectar.Open();
-                    return conectar;
-                }
-                catch (Exception e)
-                {
-                    return null;
-
-                }
-                
-            }
-        }
-
-        #endregion
 
         #region ENTIDAD
         public class Huella

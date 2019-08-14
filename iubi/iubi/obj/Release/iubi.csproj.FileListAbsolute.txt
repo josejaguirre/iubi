@@ -51,3 +51,32 @@ C:\Users\oswaldpale\Documents\Visual Studio 2015\Projects\iubi\iubi\iubi\obj\Rel
 C:\Users\oswaldpale\Documents\Visual Studio 2015\Projects\iubi\iubi\iubi\obj\Release\iubi.application
 C:\Users\oswaldpale\Documents\Visual Studio 2015\Projects\iubi\iubi\iubi\obj\Release\iubi.exe
 C:\Users\oswaldpale\Documents\Visual Studio 2015\Projects\iubi\iubi\iubi\obj\Release\iubi.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\iubi.exe.config
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\iubi.exe.manifest
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\iubi.application
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\iubi.exe
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\iubi.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\log4net.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\Newtonsoft.Json.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.Common.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.SocketBase.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.SocketEngine.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperWebSocket.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\log4net.xml
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\Newtonsoft.Json.xml
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.Common.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.SocketBase.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperSocket.SocketEngine.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperWebSocket.pdb
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\bin\Release\SuperWebSocket.xml
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.csprojAssemblyReference.cache
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\Interop.DPFPShrXLib.dll
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.csproj.ResolveComReference.cache
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.iubi.resources
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.csproj.GenerateResource.cache
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.csproj.CoreCompileInputs.cache
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.exe.manifest
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.application
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.csproj.CopyComplete
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.exe
+C:\Users\jose\Developer\kelloggs\iubi\iubi\iubi\obj\Release\iubi.pdb
