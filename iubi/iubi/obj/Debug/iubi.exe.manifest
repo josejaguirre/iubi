@@ -44,14 +44,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iubi.exe" size="20480">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iubi.exe" size="19968">
       <assemblyIdentity name="iubi" version="0.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>E7iDNhQTlzqjEzKTK6a75P9lwL66koVfrnQMBm4cYB8=</dsig:DigestValue>
+        <dsig:DigestValue>NuRstuWWok9uE7RrtJNW9kT0g77Ny3P5oqCKRLRVRcg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

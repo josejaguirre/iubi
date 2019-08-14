@@ -394,9 +394,7 @@ namespace iubi
 
         }
 
-
-        public void OnComplete(object Capture, string ReaderSerialNumber, DPFP.Sample Sample)
-        {
+        public void OnComplete(object Capture, string ReaderSerialNumber, DPFP.Sample Sample) { 
             string state = "";
 
             switch (typeProcces)
@@ -414,24 +412,13 @@ namespace iubi
 
             }
 
-            // string utf8String = Encoding.UTF8.GetString(Sample.Bytes, 0, Sample.Bytes.Length);
+            
             string hexString = "0x" + BitConverter.ToString(Sample.Bytes).Replace("-", string.Empty);
 
-            BitMapToString(ConvertSampleToBitmap(Sample)); // CREO LA IMAGEN DE LA HUELLA.
+            // Create image of finger
+            BitMapToString(ConvertSampleToBitmap(Sample));
 
-            string json = @"data =
-                    {
-                        'type': '" + typeProcces + @"',
-                        'payload': [
-                            {
-                                'state' : '" + state + @"',
-                                'enrroller' : '" + stateEnrroller + @"',
-                                'bytes'  : '" + hexString + @"',
-                                'data' : '" + bitmapDactilar + @"'                            
-                            }
-                        ] 
-                    }
-                ";
+            string json = "{ \"type\": \"" + typeProcces + "\", \"payload\": [{\"state\" : \"" + state + "\", \"enrroller\" : " + stateEnrroller + ", \"bytes\"  : \"" + hexString + "\", \"data\" : \"" + bitmapDactilar + "\" }]}";
 
             foreach (WebSocketSession session in appServer.GetAllSessions())
             {
