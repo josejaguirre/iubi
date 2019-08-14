@@ -100,7 +100,7 @@ namespace iubi
 
         private void UpdateStatus()
         {
-            this.stateEnrroller = (int)Enroller.FeaturesNeeded;
+            this.stateEnrroller = (int) Enroller.FeaturesNeeded;
         }
 
         public void Start()
@@ -206,6 +206,7 @@ namespace iubi
         private bool Validate(DPFP.Sample Sample)
         {
             DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
+            
             if (features != null)
             {
                 UpdateStatus(); //Actualiza el estado del lector.
@@ -216,7 +217,6 @@ namespace iubi
 
         private bool ValidateOneFingerPrint(FeatureSet features)
         {
-
             string json = @"data =
                     {
                         'type': '" + "failed" + @"',
@@ -359,7 +359,7 @@ namespace iubi
                 switch (type)
                 {
                     case "connectserver":
-                        ServerType = obj.payload[0].type; ;
+                        ServerType = obj.payload[0].type;
                         break;
                     case "register":
                         Start();
@@ -406,14 +406,16 @@ namespace iubi
                     break;
                 case "validate":
                     state = Validate(Sample) ? "complete" : "failed";
-                    if (state == "complete")
-                        Pause();
+                    if (state == "complete") Pause();
                     break;
                 default:
                     state = "checkin";
                     break;
 
             }
+
+            // string utf8String = Encoding.UTF8.GetString(Sample.Bytes, 0, Sample.Bytes.Length);
+            string hexString = "0x" + BitConverter.ToString(Sample.Bytes).Replace("-", string.Empty);
 
             BitMapToString(ConvertSampleToBitmap(Sample)); // CREO LA IMAGEN DE LA HUELLA.
 
@@ -423,8 +425,9 @@ namespace iubi
                         'payload': [
                             {
                                 'state' : '" + state + @"',
-                                'enrroller' : '" + stateEnrroller + @"',        
-                                'data'  : '" + bitmapDactilar + @"'                           
+                                'enrroller' : '" + stateEnrroller + @"',
+                                'bytes'  : '" + hexString + @"',
+                                'data' : '" + bitmapDactilar + @"'                            
                             }
                         ] 
                     }
@@ -434,8 +437,8 @@ namespace iubi
             {
                 session.Send(json);
             }
-
         }
+
         public void OnReaderConnect(object Capture, string ReaderSerialNumber)
         {
             try
